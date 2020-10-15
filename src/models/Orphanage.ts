@@ -1,6 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  JoinColumn,
+} from 'typeorm';
 
 import { ORPHANAGES_TABLE_NAME } from '../database/migrations/1602723138187-create_orphanages';
+
+import Image from './Image';
 
 @Entity(ORPHANAGES_TABLE_NAME)
 export default class Orphanage {
@@ -27,4 +35,10 @@ export default class Orphanage {
 
   @Column()
   open_on_weekends: boolean;
+
+  @OneToMany(() => Image, (image) => image.orphanage, {
+    cascade: ['insert', 'update'],
+  })
+  @JoinColumn({ name: 'orphanage_id' })
+  images: Image[];
 }
