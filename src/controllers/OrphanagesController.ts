@@ -48,7 +48,7 @@ export default {
       title,
       about,
       instructions,
-      open_on_weekends,
+      open_on_weekends: open_on_weekends === 'true',
       latitude,
       longitude,
       opening_hours,
